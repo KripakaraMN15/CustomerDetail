@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import CustomerList from './CustomerList';
+import CustomerDetails from './CustomerDetails';
+import { fetchCustomers } from './data'; 
+import { Customer } from './Customers';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App: React.FC = () => {
+  const [customers, setCustomers] = useState<Customer[]>([]);
+  const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null);
 
-export default App;
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetchedCustomers = await fetchCustomers(); 
+      setCustomers(fetchedCustomers);
+    
+    
+    return (
+      <div className="customer-portal">
+        <CustomerList customers={customers} onCustomerSelect={setSelectedCustomer} />
+        <CustomerDetails customer={selectedCustomer} />
+      </div>
+    );
+    };
