@@ -1,3 +1,3 @@
 # CustomerDetail
 
-Chec the master branch for the Portal
+Check the master branch for the Customer Details Portal source code. 
